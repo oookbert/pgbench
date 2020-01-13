@@ -2,7 +2,9 @@
 ```
 压测脚本ss.sql
 \set aid getnext(0)
-select * from tbl where id=:aid[0] and times = :aid[1]
+\set m1 get_filed_by_index(:aid,'\t',0)
+\set m2 get_filed_by_index(:aid,'\t',1)
+select * from tbl where id=:m1 and times = :m2
 
 压测命令
 ./pgbench -f ss.sql --seqread-file /tmp/seq.csv -Mprepared -P1 -r -n -c 10 -T 10 benchmark
